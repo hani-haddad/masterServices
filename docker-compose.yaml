@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  mongodb:
+    image: mongo
+    
+    container_name: my-mongodb
+    ports:
+      - "27017:27017"
+      
+  AuthProject:
+    image: hanihaddad/auth_project:backend-builder
+    build:
+      context: ./AuthProject/AuthProject
+      dockerfile: ./docker/builder.Dockerfile
+    
+    volumes:
+      - ./AuthProject/AuthProject:/app
+    command: [  "watch", "run",  "--urls", "http://0.0.0.0:5055"]
+    ports:
+      - "5055:5055"
