@@ -1,0 +1,1 @@
+docker build ../ -f ./builder.Dockerfile -t hanihaddad/auth_project:backend-builder
