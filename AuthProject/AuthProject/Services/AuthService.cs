@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using AuthProject.Helpers;
 using AuthProject.Models;
+using SharedModelNamespace.Shared;
 using AuthProject.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AuthProject.Services
 {
     public interface IAuthService
     {
         UserClaims Login(UserCredintials user);
-
+        string Create(User user);
     }
 
     public class AuthService : IAuthService
@@ -36,6 +38,8 @@ namespace AuthProject.Services
 
         public UserClaims Login(UserCredintials user)
         {
+            List<User> Userrrrr = new List<User>();
+
             User currentUser = _users.Find(user => true).ToList().Where(usr => usr.Username == user.UserName && usr.Password == user.Password).FirstOrDefault();
             if (currentUser != null)
             {
@@ -56,6 +60,36 @@ namespace AuthProject.Services
                 return claims;
             }
             return null;
+        }
+
+        public string Create(User user)
+        {
+            try
+            {
+                bool Availability  = CheckUsernameAvailability(user);
+                if (Availability){
+                    user.AdminOfGroups = new List<string>();
+                    user.MemberInGroups = new List<string>();
+                    user.RecivedInvitations = new List<string>();
+                    user.SentInvitations = new List<string>();
+                    _users.InsertOne(user);
+                    return null;
+                }
+                else{
+                    return "error: username available";
+                }
+                
+            }
+            catch(Exception e)
+            {
+                return "server internal error";
+            }
+                
+        }
+        private bool CheckUsernameAvailability(User user){
+        var filter = Builders<User>.Filter.Eq(u => u.Username, user.Username);
+        if(_users.Find(filter).SingleOrDefault() == null) return true;
+        else return false;
         }
     }
 }
