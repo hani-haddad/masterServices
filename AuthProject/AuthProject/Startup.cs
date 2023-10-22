@@ -39,8 +39,6 @@ namespace AuthProject
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod()
                  .AllowAnyHeader());
             });
-            services.AddMvc()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             // requires using Microsoft.Extensions.Options
             var authDBSettings = Configuration.GetSection("AuthDBSettings");

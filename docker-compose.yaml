@@ -10,11 +10,12 @@ services:
   AuthProject:
     image: hanihaddad/auth_project:backend-builder
     build:
-      context: ./AuthProject/AuthProject
-      dockerfile: ./docker/builder.Dockerfile
+      context: ./
+      dockerfile: ./AuthProject/AuthProject/docker/builder.Dockerfile
     
     volumes:
-      - ./AuthProject/AuthProject:/app
-    command: [  "watch", "run",  "--urls", "http://0.0.0.0:5055"]
+      - ./AuthProject/AuthProject:/app/AuthProject
+      - ./SharedModelNamespace/SharedModelNamespace:/app/SharedModelNamespace
+    command: [  "watch", "run"]
     ports:
       - "5055:5055"
