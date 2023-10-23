@@ -24,9 +24,9 @@ namespace AuthProject.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public IActionResult Login([FromBody] UserCredintials user)
+        public async Task<IActionResult> Login([FromBody] UserCredintials user)
         {
-            UserClaims claims = _auth.Login(user);
+            UserClaims claims = await _auth.Login(user);
             if (claims != null)
             {
                 return Ok(claims);
