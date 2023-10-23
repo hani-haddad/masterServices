@@ -1,0 +1,1 @@
+docker build ../CRUDAPI/ -f ./builder.Dockerfile -t hanihaddad/crudapi:crud-backend-builder

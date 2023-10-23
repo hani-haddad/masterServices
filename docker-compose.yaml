@@ -18,4 +18,17 @@ services:
       - ./SharedModelNamespace/SharedModelNamespace:/app/SharedModelNamespace
     command: [  "watch", "run"]
     ports:
+      - "5060:5060"
+
+  CRUDAPI:
+    image: hanihaddad/crudapi:crud-backend-builder
+    build:
+      context: ./
+      dockerfile: ./CRUDAPI/docker/builder.Dockerfile
+    
+    volumes:
+      - ./CRUDAPI:/app/CRUDAPI
+      - ./SharedModelNamespace/SharedModelNamespace:/app/SharedModelNamespace
+    command: [  "watch", "run"]
+    ports:
       - "5055:5055"
