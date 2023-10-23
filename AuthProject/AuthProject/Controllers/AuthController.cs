@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SharedModelNamespace.Shared.ViewModels;
+using AuthProject.ViewModels;
 using AuthProject.Services;
 
 namespace AuthProject.Controllers

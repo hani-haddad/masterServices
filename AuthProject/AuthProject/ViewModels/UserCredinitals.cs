@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-namespace SharedModelNamespace.Shared.ViewModels
+namespace AuthProject.ViewModels
 {
     public class UserCredintials
     {

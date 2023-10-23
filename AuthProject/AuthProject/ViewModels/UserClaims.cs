@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-namespace SharedModelNamespace.Shared.ViewModels
+namespace AuthProject.ViewModels
 {
     public class UserClaims
     {

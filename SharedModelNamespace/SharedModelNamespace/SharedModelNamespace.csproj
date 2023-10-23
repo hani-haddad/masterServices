@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <None Remove="Shared\" />
-    <None Remove="Shared\ViewModels\" />
     <None Remove="MongoDB.Bson" />
     <None Remove="Shared\DBRepositories\" />
     <None Remove="Shared\Helpers\" />
