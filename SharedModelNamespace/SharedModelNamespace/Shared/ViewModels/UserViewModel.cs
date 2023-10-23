@@ -1,14 +1,10 @@
-﻿
-using System.Collections.Generic;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace SharedModelNamespace.Shared
+namespace SharedModelNamespace.Shared.ViewModels
 {
-    public class User
+    public class UserViewModel
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("Id")]
         public string Id { get; set; }
 
         [BsonElement("FirstName")]
@@ -22,9 +18,6 @@ namespace SharedModelNamespace.Shared
 
         [BsonElement("Username")]
         public string Username { get; set; }
-
-        [BsonElement("Password")]
-        public string Password { get; set; }
 
         [BsonElement("Phone")]
         public string Phone { get; set; }

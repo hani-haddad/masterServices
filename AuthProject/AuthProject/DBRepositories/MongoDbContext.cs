@@ -1,9 +1,9 @@
 ﻿using System;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using AuthProject.Models;
+using SharedModelNamespace.Shared;
 
-namespace AuthProject.MongoDbRepository
+namespace AuthProject.DBRepositories
 {
 
     public class MongoDbContext

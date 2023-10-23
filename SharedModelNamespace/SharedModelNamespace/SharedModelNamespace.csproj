@@ -6,12 +6,16 @@
 
   <ItemGroup>
     <None Remove="Shared\" />
+    <None Remove="Shared\ViewModels\" />
     <None Remove="MongoDB.Bson" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Shared\" />
+    <Folder Include="Shared\ViewModels\" />
+
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MongoDB.Bson" Version="2.22.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>

@@ -4,18 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using AuthProject.Helpers;
-using AuthProject.Models;
 using SharedModelNamespace.Shared;
-using AuthProject.ViewModels;
+using SharedModelNamespace.Shared.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthProject.Services
 {
+
     public interface IAuthService
     {
         UserClaims Login(UserCredintials user);
         string Create(User user);
     }
+
 
     public class AuthService : IAuthService
     {
@@ -26,7 +27,6 @@ namespace AuthProject.Services
         {
             // database: Represents the Mongo database for performing operations.
             // The constructor of this class is provided the MongoDB Database Name
-
             var database = mongoDb.GetDatabase(settings.DatabaseName);
 
             // _users: To access to data in a specific collection.
@@ -36,10 +36,9 @@ namespace AuthProject.Services
             _jwt = jwt;
         }
 
+
         public UserClaims Login(UserCredintials user)
         {
-            List<User> Userrrrr = new List<User>();
-
             User currentUser = _users.Find(user => true).ToList().Where(usr => usr.Username == user.UserName && usr.Password == user.Password).FirstOrDefault();
             if (currentUser != null)
             {
@@ -50,46 +49,45 @@ namespace AuthProject.Services
                 claims.LastName = currentUser.LastName;
                 claims.Id = currentUser.Id;
                 claims.Email = currentUser.Email;
-                claims.Age = currentUser.Age;
-                claims.Image = currentUser.Image;
-                claims.MemberInGroups = currentUser.MemberInGroups;
-                claims.AdminOfGroups = currentUser.AdminOfGroups;
-                claims.RecivedInvitations = currentUser.RecivedInvitations;
-                claims.SentInvitations = currentUser.SentInvitations;
+                claims.Phone = currentUser.Phone;
                 claims.Token = _jwt.GenerateToken(claims);
                 return claims;
             }
             return null;
         }
 
+
         public string Create(User user)
         {
             try
             {
-                bool Availability  = CheckUsernameAvailability(user);
-                if (Availability){
-                    user.AdminOfGroups = new List<string>();
-                    user.MemberInGroups = new List<string>();
-                    user.RecivedInvitations = new List<string>();
-                    user.SentInvitations = new List<string>();
+                bool Availability = CheckUsernameAvailability(user);
+                if (Availability)
+                {
                     _users.InsertOne(user);
                     return null;
                 }
-                else{
+                else
+                {
                     return "error: username available";
                 }
-                
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                return "server internal error";
+                return "server internal error" + e;
             }
-                
+
         }
-        private bool CheckUsernameAvailability(User user){
-        var filter = Builders<User>.Filter.Eq(u => u.Username, user.Username);
-        if(_users.Find(filter).SingleOrDefault() == null) return true;
-        else return false;
+
+
+        private bool CheckUsernameAvailability(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Username, user.Username);
+            if (_users.Find(filter).SingleOrDefault() == null) return true;
+            else return false;
         }
+
+
     }
 }

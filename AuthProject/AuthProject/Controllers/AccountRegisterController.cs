@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SharedModelNamespace.Shared;
 namespace AuthProject.Controllers
-{[
-    Authorize]
+{
+    [Authorize]
     [Route("api/register")]
     [ApiController]
    public class AccountRegisterController : Controller
