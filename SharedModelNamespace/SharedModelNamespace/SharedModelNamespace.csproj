@@ -8,14 +8,17 @@
     <None Remove="Shared\" />
     <None Remove="Shared\ViewModels\" />
     <None Remove="MongoDB.Bson" />
+    <None Remove="Shared\DBRepositories\" />
+    <None Remove="Shared\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Shared\" />
-    <Folder Include="Shared\ViewModels\" />
-
+    <Folder Include="Shared\DBRepositories\" />
+    <Folder Include="Shared\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MongoDB.Bson" Version="2.22.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.22.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.22.0" />
   </ItemGroup>
 </Project>

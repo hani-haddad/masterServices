@@ -36,12 +36,12 @@ namespace AuthProject.Helpers
 
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new("id",user.Id),
-                    new("username", user.Username ),
-                    new("firstName",user.FirstName),
-                    new("lastName",user.LastName),
-                    new("email",user.Email),
-                    new("phone",user.Phone)
+                    new Claim("id",user.Id),
+                    new Claim("username", user.Username ),
+                    new Claim("firstName",user.FirstName),
+                    new Claim("lastName",user.LastName),
+                    new Claim("email",user.Email),
+                    new Claim("phone",user.Phone),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

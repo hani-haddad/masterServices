@@ -7,8 +7,8 @@
   <ItemGroup>
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <None Remove="Controllers\" />
+    <None Remove="ViewModels\" />
     <None Remove="Services\" />
-    <None Remove="DBRepositories\" />
     <None Remove="Helpers\" />
     <None Remove="MongoDB.Bson" />
     <None Remove="MongoDB.Driver.Core" />
@@ -27,8 +27,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
-    <Folder Include="DBRepositories\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
