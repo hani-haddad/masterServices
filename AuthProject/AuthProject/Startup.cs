@@ -12,12 +12,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using AuthProject.Helpers;
-using AuthProject.Models;
 using AuthProject.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using MongoDB.Driver;
+using SharedModelNamespace.Shared.DBRepositories;
+using SharedModelNamespace.Shared.Helpers;
 
 namespace AuthProject
 {
@@ -77,8 +78,10 @@ namespace AuthProject
             });
 
             // configure Depandency Injection for application services and helpers
-            services.AddScoped<IJwtHelper, JWTHelper>();
+            services.AddScoped<IJwtHelper, JWTHelper>();           
+            services.AddScoped<SharedModelNamespace.Shared.DBRepositories.IMongoDbRepository, SharedModelNamespace.Shared.DBRepositories.MongoDbRepository>();
             services.AddScoped<IAuthService, AuthService>();
+
             services.AddControllers();
 
         }

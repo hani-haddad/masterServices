@@ -22,22 +22,8 @@ namespace AuthProject.ViewModels
         [JsonProperty("Username")]
         public string Username { get; set; }
 
-        [JsonProperty("Age")]
-        public string Age { get; set; }
+        [JsonProperty("Phone")]
+        public string Phone { get; set; }
 
-        [JsonProperty("AdminOfGroups")]
-        public List<string> AdminOfGroups { get; set; }
-
-        [JsonProperty("MemberInGroups")]
-        public List<string> MemberInGroups { get; set; }
-
-        [JsonProperty("Image")]
-        public string Image { get; set; }
-
-        [JsonProperty("SentInvitations")]
-        public List<string> SentInvitations { get; set; }
-
-        [JsonProperty("RecivedInvitations")]
-        public List<string> RecivedInvitations { get; set; }
     }
 }

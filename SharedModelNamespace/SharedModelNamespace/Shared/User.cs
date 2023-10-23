@@ -26,23 +26,8 @@ namespace SharedModelNamespace.Shared
         [BsonElement("Password")]
         public string Password { get; set; }
 
-        [BsonElement("Age")]
-        public string Age { get; set; }
-
-        [BsonElement("AdminOfGroups")]
-        public List<string> AdminOfGroups { get; set; }
-
-        [BsonElement("MemberInGroups")]
-        public List<string> MemberInGroups { get; set; }
-
-        [BsonElement("Image")]
-        public string Image { get; set; }
-
-        [BsonElement("SentInvitations")]
-        public List<string> SentInvitations { get; set; }
-
-        [BsonElement("RecivedInvitations")]
-        public List<string> RecivedInvitations { get; set; }
+        [BsonElement("Phone")]
+        public string Phone { get; set; }
 
     }
 }
