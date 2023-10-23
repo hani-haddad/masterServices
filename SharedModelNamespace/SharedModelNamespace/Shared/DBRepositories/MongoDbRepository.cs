@@ -1,14 +1,13 @@
 ﻿using System;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using AuthProject.Helpers;
+using SharedModelNamespace.Shared.Helpers;
 using SharedModelNamespace.Shared;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace AuthProject.DBRepositories
+namespace SharedModelNamespace.Shared.DBRepositories
 {
-
     public interface IMongoDbRepository
     {
         Task<User> GetUserByIdAsync(string userId);
@@ -44,16 +43,18 @@ namespace AuthProject.DBRepositories
         {
             try
             {
-                bool Availability  = CheckUsernameAvailability(user);
-                if (Availability){
+                bool Availability = CheckUsernameAvailability(user);
+                if (Availability)
+                {
                     _users.InsertOne(user);
                     return null;
                 }
-                else{
+                else
+                {
                     return "error: username available";
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return "server internal error";
             }
@@ -75,10 +76,11 @@ namespace AuthProject.DBRepositories
             return await _users.Find(filter).FirstOrDefaultAsync();
         }
 
-        private bool CheckUsernameAvailability(User user){
-        var filter = Builders<User>.Filter.Eq(u => u.Username, user.Username);
-        if(_users.Find(filter).SingleOrDefault() == null) return true;
-        else return false;
+        private bool CheckUsernameAvailability(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Username, user.Username);
+            if (_users.Find(filter).SingleOrDefault() == null) return true;
+            else return false;
         }
     }
 }

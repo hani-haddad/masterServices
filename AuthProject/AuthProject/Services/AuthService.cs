@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MongoDB.Driver;
 using AuthProject.Helpers;
-using SharedModelNamespace.Shared;
 using AuthProject.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using AuthProject.DBRepositories;
-
+using SharedModelNamespace.Shared;
 namespace AuthProject.Services
 {
     public interface IAuthService
@@ -19,12 +13,13 @@ namespace AuthProject.Services
 
     public class AuthService : IAuthService
     {
-        private readonly IMongoDbRepository _mongoDbRepository;
+        private readonly  SharedModelNamespace.Shared.DBRepositories.IMongoDbRepository _mongoDbRepository;
 
         private readonly IMongoCollection<User> _users;
         private readonly IJwtHelper _jwt;
 
-        public AuthService(IMongoDbRepository mongoDbRepository,IAuthDBSettings settings, IMongoClient mongoDb, IJwtHelper jwt)
+        public AuthService(SharedModelNamespace.Shared.DBRepositories.IMongoDbRepository mongoDbRepository
+                            , IMongoClient mongoDb, IJwtHelper jwt)
         {
             _mongoDbRepository = mongoDbRepository;
             _jwt = jwt;
@@ -35,14 +30,16 @@ namespace AuthProject.Services
             User currentUser = await _mongoDbRepository.GetCurrentUser(user.UserName,user.Password);
             if (currentUser != null)
             {
-                UserClaims claims = new UserClaims();
 
-                claims.Username = user.UserName;
-                claims.FirstName = currentUser.FirstName;
-                claims.LastName = currentUser.LastName;
-                claims.Id = currentUser.Id;
-                claims.Email = currentUser.Email;
-                claims.Phone = currentUser.Phone;
+                UserClaims claims = new()
+                {
+                    Username = user.UserName,
+                    FirstName = currentUser.FirstName,
+                    LastName = currentUser.LastName,
+                    Id = currentUser.Id,
+                    Email = currentUser.Email,
+                    Phone = currentUser.Phone
+                };
                 claims.Token = _jwt.GenerateToken(claims);
                 return claims;
             }

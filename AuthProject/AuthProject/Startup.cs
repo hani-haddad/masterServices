@@ -17,7 +17,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using MongoDB.Driver;
-using AuthProject.DBRepositories;
+using SharedModelNamespace.Shared.DBRepositories;
+using SharedModelNamespace.Shared.Helpers;
 
 namespace AuthProject
 {
@@ -78,7 +79,7 @@ namespace AuthProject
 
             // configure Depandency Injection for application services and helpers
             services.AddScoped<IJwtHelper, JWTHelper>();           
-            services.AddScoped<IMongoDbRepository, MongoDbRepository>();
+            services.AddScoped<SharedModelNamespace.Shared.DBRepositories.IMongoDbRepository, SharedModelNamespace.Shared.DBRepositories.MongoDbRepository>();
             services.AddScoped<IAuthService, AuthService>();
 
             services.AddControllers();

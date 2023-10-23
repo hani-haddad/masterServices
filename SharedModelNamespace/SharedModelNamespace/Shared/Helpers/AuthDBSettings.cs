@@ -1,5 +1,5 @@
 ﻿using System;
-namespace AuthProject.Helpers
+namespace SharedModelNamespace.Shared.Helpers
 {
     public interface IAuthDBSettings
     {
