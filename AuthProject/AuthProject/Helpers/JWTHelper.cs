@@ -41,12 +41,7 @@ namespace AuthProject.Helpers
                     new Claim("firstName",user.FirstName),
                     new Claim("lastName",user.LastName),
                     new Claim("email",user.Email),
-                    new Claim("age",user.Age),
-                    //new Claim("recivedInvitations", string.Join(",",user.RecivedInvitations.ToArray())),
-                    //new Claim("adminOfGroups", string.Join(",",user.AdminOfGroups.ToArray())),
-                    //new Claim("memberInGroups", string.Join(",",user.MemberInGroups.ToArray()) ),
-                    new Claim("image",user.Image)
-                    //new Claim("sentInvitations",string.Join(",",user.SentInvitations.ToArray()))
+                    new Claim("phone",user.Phone),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

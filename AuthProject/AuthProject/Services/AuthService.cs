@@ -50,12 +50,7 @@ namespace AuthProject.Services
                 claims.LastName = currentUser.LastName;
                 claims.Id = currentUser.Id;
                 claims.Email = currentUser.Email;
-                claims.Age = currentUser.Age;
-                claims.Image = currentUser.Image;
-                claims.MemberInGroups = currentUser.MemberInGroups;
-                claims.AdminOfGroups = currentUser.AdminOfGroups;
-                claims.RecivedInvitations = currentUser.RecivedInvitations;
-                claims.SentInvitations = currentUser.SentInvitations;
+                claims.Phone = currentUser.Phone;
                 claims.Token = _jwt.GenerateToken(claims);
                 return claims;
             }
@@ -68,10 +63,6 @@ namespace AuthProject.Services
             {
                 bool Availability  = CheckUsernameAvailability(user);
                 if (Availability){
-                    user.AdminOfGroups = new List<string>();
-                    user.MemberInGroups = new List<string>();
-                    user.RecivedInvitations = new List<string>();
-                    user.SentInvitations = new List<string>();
                     _users.InsertOne(user);
                     return null;
                 }
