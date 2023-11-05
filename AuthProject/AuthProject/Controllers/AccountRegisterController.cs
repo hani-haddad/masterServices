@@ -11,7 +11,7 @@ namespace AuthProject.Controllers
     [ApiController]
    public class AccountRegisterController : Controller
    {
-        public IAuthService _auth;
+        public readonly IAuthService _auth;
 
         public AccountRegisterController(IAuthService authService)
         {

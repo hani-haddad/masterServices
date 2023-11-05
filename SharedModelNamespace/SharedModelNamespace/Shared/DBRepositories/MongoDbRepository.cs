@@ -5,6 +5,7 @@ using SharedModelNamespace.Shared.Helpers;
 using SharedModelNamespace.Shared;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace SharedModelNamespace.Shared.DBRepositories
 {
@@ -12,9 +13,13 @@ namespace SharedModelNamespace.Shared.DBRepositories
     {
         Task<User> GetUserByIdAsync(string userId);
         Task<User> GetCurrentUser(string username, string password);
-
+        Task<List<User>> GetAllUsersAsync();
+        Task<User> UpdateAsync(User user);
+        Task<User> UpdatePasswordAsync(string id,string newPassword);
+        Task<bool> RemoveAsync(string id);
+        Task<bool> RemoveAsync(User user);
         // Task<IEnumerable<User>> GetUsersAsync();
-        string CreateUser(User user);
+        Task<string> CreateUserAsync(User user);
     }
     public class MongoDbRepository : IMongoDbRepository
     {
@@ -39,14 +44,14 @@ namespace SharedModelNamespace.Shared.DBRepositories
             return database.ListCollectionNames(options).Any();
         }
 
-        public string CreateUser(User user)
+        public async Task<string> CreateUserAsync(User user)
         {
             try
             {
                 bool Availability = CheckUsernameAvailability(user);
                 if (Availability)
                 {
-                    _users.InsertOne(user);
+                    await _users.InsertOneAsync(user);
                     return null;
                 }
                 else
@@ -56,7 +61,7 @@ namespace SharedModelNamespace.Shared.DBRepositories
             }
             catch (Exception e)
             {
-                return "server internal error";
+                return "server internal error : "+e;
             }
         }
 
@@ -76,11 +81,54 @@ namespace SharedModelNamespace.Shared.DBRepositories
             return await _users.Find(filter).FirstOrDefaultAsync();
         }
 
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+            return await _users.Find(u => true).ToListAsync<User>();
+        }
+        
         private bool CheckUsernameAvailability(User user)
         {
             var filter = Builders<User>.Filter.Eq(u => u.Username, user.Username);
             if (_users.Find(filter).SingleOrDefault() == null) return true;
             else return false;
+        }
+        public async Task<User> UpdateAsync(User user) {
+            
+            var result = await _users.ReplaceOneAsync(x => x.Id.Equals(user.Id) , user);
+            if (result.IsAcknowledged)
+            {
+                return await GetUserByIdAsync(user.Id);
+            }
+            return null;
+        }
+
+        public async Task<User> UpdatePasswordAsync(string id,string newPassword)
+        {
+            var usr = await GetUserByIdAsync(id);
+            if(usr == null)
+            {
+                return null;
+            }
+            usr.Password = newPassword;
+            return await UpdateAsync(usr);
+        }
+
+        public async Task<bool> RemoveAsync(User user) {
+           var result = await _users.DeleteOneAsync(x => x.Id == user.Id);
+           if (result.IsAcknowledged)
+            {
+                return true;
+            }
+            return false;
+        }
+            
+        public async Task<bool> RemoveAsync(string id) {
+           var result = await _users.DeleteOneAsync(x => x.Id.Equals(id));
+           if (result.IsAcknowledged)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

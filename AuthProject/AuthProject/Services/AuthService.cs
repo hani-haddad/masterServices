@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MongoDB.Driver;
-using AuthProject.Helpers;
-using AuthProject.ViewModels;
+using SharedModelNamespace.Shared.Helpers;
+using SharedModelNamespace.Shared.ViewModels;
 using SharedModelNamespace.Shared;
 namespace AuthProject.Services
 {
@@ -14,12 +14,10 @@ namespace AuthProject.Services
     public class AuthService : IAuthService
     {
         private readonly  SharedModelNamespace.Shared.DBRepositories.IMongoDbRepository _mongoDbRepository;
-
-        private readonly IMongoCollection<User> _users;
         private readonly IJwtHelper _jwt;
 
-        public AuthService(SharedModelNamespace.Shared.DBRepositories.IMongoDbRepository mongoDbRepository
-                            , IMongoClient mongoDb, IJwtHelper jwt)
+        public AuthService(SharedModelNamespace.Shared.DBRepositories.IMongoDbRepository mongoDbRepository,
+                        IJwtHelper jwt)
         {
             _mongoDbRepository = mongoDbRepository;
             _jwt = jwt;

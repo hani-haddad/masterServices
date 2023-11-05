@@ -8,18 +8,18 @@ RUN apt-get update && apt-get -y install bash rsync
 # RUN mkdir -p /app/SharedModelNamespace
 # COPY . /app
 
-ADD AuthProject/AuthProject/docker/ci AuthProject/ci
+ADD CRUDAPI/docker/ci /CRUDAPI/ci
 WORKDIR /build/
 # Copy the solution and project files
-COPY AuthProject/AuthProject/AuthProject.csproj ./AuthProject/
+COPY CRUDAPI/CRUDAPI.csproj ./CRUDAPI/
 COPY SharedModelNamespace/SharedModelNamespace/SharedModelNamespace.csproj ./SharedModelNamespace/
 
-RUN dotnet restore "./AuthProject/AuthProject.csproj" 
+RUN dotnet restore "./CRUDAPI/CRUDAPI.csproj" 
 
 
 COPY . .
-WORKDIR /build/AuthProject/
-ENTRYPOINT ["/bin/bash", "/AuthProject/ci/start.sh"]
+WORKDIR /build/CRUDAPI/
+ENTRYPOINT ["/bin/bash", "/CRUDAPI/ci/start.sh"]
 
-# ENTRYPOINT ["dotnet" ,"run"]
+# ENTRYPOINT ["dotnet" ,"restore"]
 

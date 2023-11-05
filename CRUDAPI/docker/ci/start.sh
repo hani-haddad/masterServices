@@ -3,7 +3,7 @@ echo MYPATH
 pwd
 
 # # Start synchronization script in the background
-/bin/bash /AuthProject/ci/sync-folders.sh &
+/bin/bash /CRUDAPI/ci/sync-folders.sh &
 
 # Wait briefly for synchronization to start
 sleep 5
@@ -13,7 +13,7 @@ service ssh start
 
 
 # Change to the build directory
-cd /build/AuthProject/AuthProject
+cd /build/CRUDAPI
 
 # Restore and run your application
 dotnet restore

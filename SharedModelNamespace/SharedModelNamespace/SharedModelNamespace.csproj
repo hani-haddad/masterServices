@@ -9,15 +9,22 @@
     <None Remove="MongoDB.Bson" />
     <None Remove="Shared\DBRepositories\" />
     <None Remove="Shared\Helpers\" />
+    <None Remove="Shared\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Shared\" />
     <Folder Include="Shared\DBRepositories\" />
     <Folder Include="Shared\Helpers\" />
+    <Folder Include="Shared\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MongoDB.Bson" Version="2.22.0" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.22.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.22.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
   </ItemGroup>
 </Project>

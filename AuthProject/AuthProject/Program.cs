@@ -21,7 +21,6 @@ namespace AuthProject
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls("http://0.0.0.0:5055");
                     webBuilder.UseStartup<Startup>();
                 });
     }
