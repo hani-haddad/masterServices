@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using AuthProject.ViewModels;
+using SharedModelNamespace.Shared.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace AuthProject.Helpers
+namespace SharedModelNamespace.Shared.Helpers
 {
     public interface IJwtHelper
     {

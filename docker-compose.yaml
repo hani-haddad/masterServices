@@ -6,16 +6,37 @@ services:
     container_name: my-mongodb
     ports:
       - "27017:27017"
-      
+
   AuthProject:
     image: hanihaddad/auth_project:backend-builder
     build:
       context: ./
       dockerfile: ./AuthProject/AuthProject/docker/builder.Dockerfile
-    
     volumes:
       - ./AuthProject/AuthProject:/app/AuthProject
       - ./SharedModelNamespace/SharedModelNamespace:/app/SharedModelNamespace
-    command: [  "watch", "run"]
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:5055
+    command: ["watch", "run"]
     ports:
       - "5055:5055"
+
+        
+  crud_api:
+    image: hanihaddad/crud_api:backend-crud-builder
+    build:
+      context: ./
+      dockerfile: ./CRUDAPI/docker/builder.Dockerfile
+    
+    volumes:
+      - ./CRUDAPI:/app/CRUDAPI
+      - ./SharedModelNamespace/SharedModelNamespace:/app/SharedModelNamespace
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:5171
+
+    command: ["watch", "run"]
+    ports:
+      - "5171:5171"    
+  
+
+

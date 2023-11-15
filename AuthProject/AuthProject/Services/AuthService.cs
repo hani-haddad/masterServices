@@ -1,25 +1,23 @@
 ﻿using System.Threading.Tasks;
 using MongoDB.Driver;
-using AuthProject.Helpers;
-using AuthProject.ViewModels;
+using SharedModelNamespace.Shared.Helpers;
+using SharedModelNamespace.Shared.ViewModels;
 using SharedModelNamespace.Shared;
 namespace AuthProject.Services
 {
     public interface IAuthService
     {
         Task<UserClaims> Login(UserCredintials user);
-        string Create(User user);
+        Task<string> Create(User user);
     }
 
     public class AuthService : IAuthService
     {
         private readonly  SharedModelNamespace.Shared.DBRepositories.IMongoDbRepository _mongoDbRepository;
-
-        private readonly IMongoCollection<User> _users;
         private readonly IJwtHelper _jwt;
 
-        public AuthService(SharedModelNamespace.Shared.DBRepositories.IMongoDbRepository mongoDbRepository
-                            , IMongoClient mongoDb, IJwtHelper jwt)
+        public AuthService(SharedModelNamespace.Shared.DBRepositories.IMongoDbRepository mongoDbRepository,
+                        IJwtHelper jwt)
         {
             _mongoDbRepository = mongoDbRepository;
             _jwt = jwt;
@@ -46,9 +44,9 @@ namespace AuthProject.Services
             return null;
         }
 
-        public  string Create(User user)
+        public async Task<string> Create(User user)
         {
-           return  _mongoDbRepository.CreateUser(user);
+           return  await _mongoDbRepository.CreateUserAsync(user);
         }
-    }
+    } 
 }
