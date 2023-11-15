@@ -19,12 +19,10 @@
   <ItemGroup>
     <None Remove="Controllers\" />
     <None Remove="Services\" />
-    <None Remove="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../SharedModelNamespace/SharedModelNamespace/SharedModelNamespace.csproj">
