@@ -8,7 +8,7 @@ namespace AuthProject.Services
     public interface IAuthService
     {
         Task<UserClaims> Login(UserCredintials user);
-        string Create(User user);
+        Task<string> Create(User user);
     }
 
     public class AuthService : IAuthService
@@ -44,9 +44,9 @@ namespace AuthProject.Services
             return null;
         }
 
-        public  string Create(User user)
+        public async Task<string> Create(User user)
         {
-           return  _mongoDbRepository.CreateUser(user);
+           return  await _mongoDbRepository.CreateUserAsync(user);
         }
-    }
+    } 
 }
